@@ -12,6 +12,7 @@ urlpatterns = [
     path('messages/delete/<pk>/', views.messages_delete, name='delete_messages'),
     path('resume/', views.resume_view, name='resume'),
     path('experience/', views.experience_view, name='experience'),
+    path('experience/delete/<pk>/', views.experience_delete, name='experience_delete'),
     path('clients/', views.client_manage, name='client_manage'),
     path('clients/delete/<pk>/', views.client_delete, name='client_delete'),
     path('blogs/', views.blog, name='blog'),

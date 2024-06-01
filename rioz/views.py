@@ -183,6 +183,14 @@ def experience_view(request):
 
 
 @login_required
+def experience_delete(request, pk):
+    experience = get_object_or_404(Experience, pk=pk)
+    experience.delete()
+
+    return redirect('rioz:experience')
+
+
+@login_required
 def edit_information_about(request):
     information = get_object_or_404(Information, id=1)  # Assuming there's only one instance
     about = get_object_or_404(About, id=1)  # Assuming there's only one instance
