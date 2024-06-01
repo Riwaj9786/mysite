@@ -128,8 +128,9 @@ def delete_client_logo(sender, instance, **kwargs):
 
 class Blog(models.Model):
     blog_id = models.CharField(max_length=15, editable=False, auto_created=True)
-    blog_topic = models.CharField(max_length=55)
+    blog_topic = models.CharField(max_length=150)
     blog_text = models.TextField()
+    date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.blog_topic
@@ -139,10 +140,10 @@ class Blog(models.Model):
     
 
 class Comments(models.Model):
-    comment_id = models.CharField(unique=True, max_length=15, auto_created=True, editable=False)
     comment_name = models.CharField(max_length=55, null=True, blank=True)
     comment_text = models.TextField()
-    blog = models.ForeignKey(Blog, on_delete=models.CASCADE)
+    blog = models.ForeignKey(Blog, on_delete=models.CASCADE, related_name='comments')
+    is_approved = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.comment_id
+        return self.comment_text

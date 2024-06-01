@@ -1,0 +1,16 @@
+<!-- edit_blog.html -->
+<!DOCTYPE html>
+{% extends 'rioz/index.html' %}
+
+{% load static %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-uppercase text-light">Edit Blog</h2>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-success">Save Changes</button>
+    </form>
+</div>
+{% endblock %}

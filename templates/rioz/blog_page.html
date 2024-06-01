@@ -5,22 +5,29 @@
 {% load static %}
 
 {% block blog_page %}
-<div class="container my-5">
+<style>
+    .card:hover {
+        transform: scale(1.05);
+        transition: transform 0.3s;
+    }
+</style>
+
+<div class="container my-5" style="padding: 20px; border-radius: 10px;">
     <div class="text-center mb-4">
         <h4 class="text-light">My Blogs</h4>
     </div>
     <div class="row">
         {% for blog in blog %}
         <div class="col-md-4 mb-4">
-            <div class="card h-100 shadow-sm">
+            <article style="background-color: #150856;" class="card text-light p-3 shadow-sm h-100" style="transition: transform 0.3s;">
                 <div class="card-body d-flex flex-column">
                     <h5 class="card-title fw-bold">{{ blog.blog_topic }}</h5>
                     <p class="card-text">{{ blog.get_excerpt|linebreaks }}</p>
-                    <a href="#" class="btn btn-primary mt-auto">Read More</a>
+                    <a href="{% url 'rioz:blog_detail' pk=blog.pk %}" class="btn btn-primary mt-auto">Read More</a>
                 </div>
-            </div>
+            </article>
         </div>
         {% endfor %}
-    </div>
+    </div>    
 </div>
 {% endblock %}

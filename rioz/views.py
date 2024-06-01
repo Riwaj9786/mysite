@@ -1,11 +1,11 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
-from rioz.models import Information, About, Experience, Service, Skills, Clients, Message, Blog
+from rioz.models import Information, Comments, About, Experience, Service, Skills, Clients, Message, Blog
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.contrib import messages
-from rioz.forms import MessageForm, ResumeForm, Info_EditForm, About_EditForm, Client_Form
+from rioz.forms import MessageForm, Comment_Form, ResumeForm, Info_EditForm, About_EditForm, Client_Form, Blog_Form
 
 # Create your views here.
 def home(request):
@@ -45,7 +45,6 @@ def user_logout(request):
     return HttpResponseRedirect(reverse('rioz:home'))
 
 
-
 @login_required
 def message_user(request):
     information = Information.objects.first()
@@ -65,8 +64,6 @@ def messages_delete(request, pk):
     return redirect('rioz:messages')
 
 
-
-
 def blog(request):
     blog = Blog.objects.all()
     information = Information.objects.first()
@@ -77,6 +74,39 @@ def blog(request):
                                                    'about': about})
 
 
+def blog_detail(request, pk):
+    information = Information.objects.first()
+    about = About.objects.first()
+    blog = get_object_or_404(Blog, pk=pk)
+    comments = Comments.objects.filter(blog = pk)
+
+    if request.method == "POST":
+        comment_form = Comment_Form(data = request.POST)
+
+        if comment_form.is_valid():
+            comment = comment_form.save(commit=False)
+            comment.blog = blog
+            comment.save()
+
+            return redirect('rioz:blog_detail', pk=pk)
+        else:
+            messages.info(request, "Comment not Added!")
+        
+        return redirect('rioz:blog_detail', pk=pk)
+        
+    else:
+        comment_form = Comment_Form()
+        return render(request, 'rioz/blog_detail.html', {'blog': blog,
+                                                     'information': information,
+                                                     'about': about,
+                                                     'comment_form': comment_form,
+                                                     'comments': comments})
+
+def delete_comment(request, pk):
+    comment = get_object_or_404(Comments, pk=pk)
+    comment.delete()
+
+    return redirect('rioz:blog_detail', pk=comment.blog.pk)
 
 
 def messageForm(request):
@@ -101,7 +131,6 @@ def messageForm(request):
                                                     'message_form': message_form})
     
 
-
 def resume_view(request):
     information = Information.objects.first()
     about = About.objects.first()
@@ -123,8 +152,6 @@ def resume_view(request):
     return render(request, 'rioz/resume.html', {'information': information,
                                                 'form': resume_form,
                                                 'about': about,})
-
-
 
 
 def experience_view(request):

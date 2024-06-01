@@ -15,4 +15,6 @@ urlpatterns = [
     path('clients/', views.client_manage, name='client_manage'),
     path('clients/delete/<pk>/', views.client_delete, name='client_delete'),
     path('blogs/', views.blog, name='blog'),
+    path('blogs/<pk>/', views.blog_detail, name='blog_detail'),
+    path('comments/<pk>/', views.delete_comment, name='delete_comment'),
 ]
