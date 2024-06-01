@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+
+{% extends 'rioz/index.html' %}
+
+{% load static %}
+
+{% block resume %}
+<div class="container-fluid text-light">
+    {% if information.cv %}
+    <embed src="{{information.cv.url}}" width="100%" height="800px" type="application/pdf">
+    {% else %}
+    <h5 class="my-5 text-center">There is no Resume available right now!</h5>
+    {% endif %}
+
+    {% if user.is_authenticated %}
+    <!-- Button to trigger modal -->
+    <div class="d-flex justify-content-end mt-3">
+        <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#editResume">
+            <span class="material-symbols-outlined">edit</span>
+        </button>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="editResume" tabindex="-1" aria-labelledby="editResumeLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-dark" id="editResumeLabel">Add New CV</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form enctype="multipart/form-data" method="POST">
+                        {% csrf_token %}
+
+                        <div class="form-group row my-3">
+                            <label class="col-sm-4 text-dark col-form-label">Add New CV:</label>
+                            <div class="col-sm-8">
+                                {{form.cv}}
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <input type="submit" class="btn btn-primary" value="Save">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+</div>
+{% endblock %}

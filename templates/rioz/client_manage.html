@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+{% extends 'rioz/index.html' %}
+
+{% load static %}
+
+{% block client_manage %}
+<div class="container flex mt-3">
+    <h5 class="text-light">Manage Clients</h5>
+    <table class="table table-dark my-4">
+        <thead>
+            <th class="text-light">Client</th>
+            <th class="text-light">Location</th>
+            <th class="text-light"></th>
+        </thead>        
+        {% for client in clients %}
+        <tr>
+            <td class="text-secondary">{{client.client_name}}</td>
+            <td class="text-secondary">{{client.location}}</td>
+            <td class="text-secondary">
+                <a href="{% url 'rioz:client_delete' pk=client.pk %}" class="btn btn-danger">
+                    <span class="material-symbols-outlined">
+                        delete
+                    </span>
+                </a>
+            </td>
+        </tr>    
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}

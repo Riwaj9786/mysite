@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+
+{% extends 'rioz/index.html' %}
+
+{% load static %}
+
+{% block contact %}
+
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <!-- Contact Details -->
+        <div class="col-md-4 contact-card shadow rounded-3 mx-4 mb-4">
+            <div class="row">
+                <img class="img-fluid" src="{{information.cover_pic.url}}" alt="Cover pic">
+            </div>
+            <div class="row justify-content-center my-4">
+                <div class="col-auto">
+                    <a href="https://mail.google.com/mail/?view=cm&fs=1&to={{information.email}}" target="_blank" class="icon-container email-icon">
+                        <i class="fab fa-google"></i>
+                    </a>                 
+                </div>
+                <div class="col-auto">
+                    <a href="https://wa.me/{{information.contact}}" class="container" target="_blank">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="row">
+                    <div class="d-flex p-4 flex-column justify-content-center align-items-start h-100">
+                        <p class="mb-2 text-secondary">
+                            <strong>Email:</strong> {{information.email}}
+                        </p>
+                        <p class="mb-2 text-secondary">
+                            <strong>Contact:</strong> {{information.contact}}
+                        </p>
+                        <p class="mb-2 text-secondary">
+                            <strong>Location:</strong> {{information.address}}
+                        </p>
+                    </div>
+            </div>
+        </div>
+
+        <!-- Message to the Admin -->
+        <div class="col-md-6 message-card text-light mx-4 mb-4 p-4">
+            <div class="row justify-content-center">
+                <h5 class="text-center">Write a Message!</h5>
+                <form class="form my-3 w-100" method="POST" action="{% url 'rioz:message_form' %}">
+                    {% csrf_token %}
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Name:</label>
+                        <div class="col-sm-8">
+                            {{message_form.name}}
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Email:</label>
+                        <div class="col-sm-8">
+                            {{message_form.email}}
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Message:</label>
+                        <div class="col-sm-8">
+                            {{message_form.message}}
+                        </div>
+                    </div>
+                    <div class="form-group row justify-content-end">
+                        <div class="col-auto">
+                            <input class="btn btn-light" type="submit" value="Send Message">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

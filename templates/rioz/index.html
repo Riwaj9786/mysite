@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Riwaj Bhurtel</title>
+    <script src="https://kit.fontawesome.com/17dcc02c38.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+        integrity="sha384-QYpEXZ+PxlxUmEN9MfR8+hgPEUMJd4gYvY5n3s7F3J2f5bWVB8mI97S5D8HJQZed" crossorigin="anonymous">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .content {
+            flex: 1;
+        }
+
+        .footer {
+            background-color: #4a77ff;
+            /* Adjust the background color as needed */
+            color: white;
+            text-align: center;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+            opacity: 75%;
+        }
+
+        .custom-img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            /* Makes the image circular */
+            object-fit: cover;
+            /* Ensures the image covers the container without distortion */
+            background-color: transparent;
+            /* Ensures background is transparent */
+        }
+
+        .custom-img:hover {
+            border: solid 2px cyan;
+        }
+
+    </style>
+
+</head>
+
+<body style="background: linear-gradient(225deg, #0f3358, #3925a8);">
+    <div class="container">
+
+        <div class="container-fluid">
+            <nav class="navbar navbar-expand-lg">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="{% url 'rioz:home' %}">
+                        <img style="width: 75px;" src="{% static 'images/logo/Rioz Logo.jpg' %}" alt="Logo">
+                    </a>
+                </div>
+                <div class="my-5 d-flex">
+
+                    {% if information.facebook %}
+                    <div class="navbar-item mx-3">
+                        <a href="{{information.facebook}}" target="_blank">
+                            <i class='fab fa-facebook' style='font-size:24px'></i>
+                        </a>
+                    </div>
+                    {% endif %}
+
+                    {% if information.instagram %}
+                    <div class="navbar-item mx-3" target="_blank">
+                        <a href="{{information.instagram}}">
+                            <i class="fab fa-instagram" style='font-size:24px'></i>
+                        </a>
+                    </div>
+                    {% endif %}
+
+                    {% if information.github %}
+                    <div class="navbar-item mx-3">
+                        <a href="{{information.github}}" target="_blank">
+                            <i class="fab fa-github" style='font-size:24px'></i>
+                        </a>
+                    </div>
+                    {% endif %}
+
+                    {% if information.linkedin %}
+                    <div class="navbar-item mx-3">
+                        <a href="{{information.linkedin}}" target="_blank">
+                            <i class="fab fa-linkedin" style='font-size:24px'></i>
+                        </a>
+                    </div>
+                    {% endif %}
+
+                    {% if information.twitter %}
+                    <div class="navbar-item mx-3">
+                        <a href="{{information.twitter}}" target="_blank">
+                            <i class="fab fa-twitter" style='font-size:24px'></i>
+                        </a>
+                    </div>
+                    {% endif %}
+
+                    {% if user.is_authenticated %}
+                    <div class="navbar-item mx-3">
+                        <a class="navbar-link" href="{% url 'rioz:user_logout' %}">
+                            Logout
+                        </a>
+                    </div>
+                    {% endif %}
+
+                </div>
+            </nav>
+
+        </div>
+
+        <div class="container-fluid rounded-3 bg-dark shadow">
+            <div class="container my-4 p-4">
+                
+                <div class="row g-4 align-items-center">
+                    <!-- Avatar Section -->
+                    <div class="col-md-3 text-center">
+                        <img class="rounded-circle border border-primary"
+                            style="width: 250px; height: 250px; object-fit: cover;" src="{{information.avatar.url}}"
+                            alt="Avatar">
+                    </div>
+        
+                    <!-- Info Section -->
+                    <div class="col-md-5 text-light">
+                        <h1 class="text-primary text-uppercase fw-bold">{{information.name}}</h1>
+                        <p class="text-light text-uppercase">{{about.short_bio}}</p>
+                        <p class="text-secondary mt-3">{{about.intro}}</p>
+                    </div>
+        
+                    <!-- Contact Section -->
+                    <div class="col-md-4 text-light">
+                        <div class="d-flex flex-column justify-content-center align-items-start h-100">
+                            <p class="mb-2">
+                                <strong>Email:</strong> {{information.email}}
+                            </p>
+                            <p class="mb-2">
+                                <strong>Contact:</strong> {{information.contact}}
+                            </p>
+                            <p class="mb-2">
+                                <strong>Birthday:</strong> {{information.born_date}}
+                            </p>
+                            <p class="mb-2">
+                                <strong>Location:</strong> {{information.address}}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+        
+                <!-- Edit Button -->
+                {% if user.is_authenticated %}
+                <div class="d-flex justify-content-end">
+                    <a href="#" class="btn btn-secondary">
+                        <span class="material-symbols-outlined">
+                            edit
+                        </span>
+                    </a>
+                </div>
+                {% endif %}
+                
+            </div>
+        </div>
+        
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-2 rounded-3 py-2 ">
+                    <ul class="navbar-nav flex-column text-center">
+                        <li class="nav-item bg-primary p-4 mb-3 fw-bold">
+                            <a class="nav-link text-light" href="{% url 'rioz:home' %}">About</a>
+                        </li>
+                        <li class="nav-item bg-primary p-4 mb-3 fw-bold">
+                            <a class="nav-link text-light" href="{% url 'rioz:resume' %}">Resume</a>
+                        </li>
+                        <li class="nav-item bg-primary mb-3 p-4 fw-bold">
+                            <a class="nav-link text-light" href="{% url 'rioz:experience' %}">Experience</a>
+                        </li>
+                        <li class="nav-item bg-primary mb-3 p-4 fw-bold">
+<<<<<<< HEAD
+                            <a class="nav-link text-light" href="{% url 'rioz:blog' %}">Blog</a>
+=======
+                            <a class="nav-link text-light" href="#">Blog</a>
+>>>>>>> origin/main
+                        </li>
+                        {% if not user.is_authenticated %}
+                        <li class="nav-item bg-primary p-4 fw-bold">
+                            <a class="nav-link text-light" href="{% url 'rioz:message_form' %}">Contact</a>
+                        </li>
+                        {% endif %}
+                        {% if user.is_authenticated %}
+                        <li class="nav-item bg-primary p-4 fw-bold">
+                            <a class="nav-link text-light" href="{% url 'rioz:messages' %}">Message</a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </div>
+
+                <!-- Main Content will Render in this Div -->
+                <div class="col-md-10 bg-dark rounded-3 shadow-lg py-4 px-5 mb-5">
+
+                    {% block about %}
+                    {% endblock %}
+
+                    {% block resume %}
+                    {% endblock %}
+
+                    {% block experience %}
+                    {% endblock %}
+
+                    {% block clients %}
+                    {% endblock %}
+
+                    {% block contact %}
+                    {% endblock %}
+
+                    {% block messages %}
+                    {% endblock %}
+
+                    {% block client_manage %}
+                    {% endblock %}
+
+<<<<<<< HEAD
+                    {% block blog_page %}
+                    {% endblock %}
+
+=======
+>>>>>>> origin/main
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <footer class="footer mt-auto py-2">
+        <div class="container text-center">
+            <p class="mb-0">&copy; 2024 Riwaj Bhurtel. All rights reserved.</p>
+        </div>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <script>
+        // Initialize all tooltips on the page
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        })
+    </script>
+</body>
+
+</html>

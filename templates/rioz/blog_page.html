@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+
+{% extends 'rioz/index.html' %}
+
+{% load static %}
+
+{% block blog_page %}
+<div class="container my-5">
+    <div class="text-center mb-4">
+        <h4 class="text-light">My Blogs</h4>
+    </div>
+    <div class="row">
+        {% for blog in blog %}
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title fw-bold">{{ blog.blog_topic }}</h5>
+                    <p class="card-text">{{ blog.get_excerpt|linebreaks }}</p>
+                    <a href="#" class="btn btn-primary mt-auto">Read More</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+
+{% extends 'rioz/index.html' %}
+
+{% block about %}
+<style>
+    .custom-img {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        /* Makes the image circular */
+        object-fit: cover;
+        /* Ensures the image covers the container without distortion */
+        background-color: transparent;
+        /* Ensures background is transparent */
+    }
+</style>
+
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-4">
+            <img class="py-5" style="width: 100%;" src="{{information.cover_pic.url}}" alt="Cover Pic">
+        </div>
+        <div class="col-md-8">
+            <div class="row text-light d-flex justify-content-center align-items-center">
+                <p class="text-danger text-uppercase">Visit my portfolio and Hire me!</p>
+                <h2 class="text-uppercase f-bold mb-0">
+                    About Me
+                </h2>
+                <hr class="mt-2" size="4">
+
+                <p class="py-4 text-secondary">{{about.about_me}}</p>
+            </div>
+        </div>
+    </div>
+    {% if user.is_authenticated %}
+    <div class="d-flex justify-content-end mt-3">
+        <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#editResume">
+            <span class="material-symbols-outlined">edit</span>
+        </button>
+    </div>
+    
+    {% endif %}
+
+    <div class="row mt-5 justify-content-center">
+        <h4 class="text-center text-light">What I am Doing?</h4>
+        {% for service in services %}
+        <div class="col-md-5 mx-3 my-3 rounded-3 shadow">
+            <div class="row">
+                <h5 class="text-center text-uppercase text-light">
+                    {{service.service_name}}
+                </h5>
+                <hr class="mt-2" size="3">
+                <p class="text-secondary">
+                    {{service.service_info}}
+                </p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% if user.is_authenticated %}
+    <div class="d-flex justify-content-end">
+        <a href="#" class="btn btn-secondary">
+            <span class="material-symbols-outlined">
+                add
+            </span>
+        </a>
+        <a href="#" class="btn btn-secondary mx-2">
+            <span class="material-symbols-outlined">
+                edit
+            </span>
+        </a>
+    </div>
+    {% endif %}
+
+    <div class="row mt-5 justify-content-center">
+        <h4 class="text-center text-light">Skills</h4>
+        {% for skill in skills %}
+        <div class="col-md-5 mx-3 my-3 rounded-3 shadow">
+            <div class="row p-3">
+                <div style="height: 100px;" class="col-md-4 d-flex align-items-center justify-content-center">
+                    <img class="img-fluid custom-img" style="width: 100px;" src="{{skill.skill_image}}" alt="">
+                </div>
+                <div class="col-md-6 mx-3">
+                    <div class="row">
+                        <h5 class="text-light my-3">
+                            {{skill.skill_name}}
+                        </h5>
+                        <div class="progress bg-dark" role="progressbar" aria-valuenow="{{skill.skill_experience}}"
+                            aria-valuemin="0" aria-valuemax="100" style="height: 10px">
+                            <div class="progress-bar" style="width: {{skill.skill_experience}}%">
+                                {{skill.skill_experience}}%</div>
+                        </div>
+                    </div>
+                    {% if user.is_authenticated %}
+                    <div class="d-flex justify-content-end">
+                        <a href="#" class="btn btn-secondary mx-2">
+                            <span class="material-symbols-outlined">
+                                edit
+                            </span>
+                        </a>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% if user.is_authenticated %}
+    <div class="d-flex justify-content-end">
+        <a href="#" class="btn btn-secondary mx-2">
+            <span class="material-symbols-outlined">
+                add
+            </span>
+        </a>
+    </div>
+    {% endif %}
+</div>
+
+{% endblock %}
