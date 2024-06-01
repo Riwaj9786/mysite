@@ -9,9 +9,5 @@ admin.site.register(models.About)
 admin.site.register(models.Service)
 admin.site.register(models.Skills)
 admin.site.register(models.Message)
-<<<<<<< HEAD
 admin.site.register(models.Clients)
 admin.site.register(models.Blog)
-=======
-admin.site.register(models.Clients)
->>>>>>> origin/main

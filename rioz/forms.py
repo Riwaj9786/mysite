@@ -1,9 +1,6 @@
 from django import forms
-<<<<<<< HEAD
 from rioz.models import Message, Information, About, Clients, Blog
-=======
-from rioz.models import Message, Information, About, Clients
->>>>>>> origin/main
+
 
 class MessageForm(forms.ModelForm):
     class Meta:
@@ -32,13 +29,10 @@ class About_EditForm(forms.ModelForm):
 class Client_Form(forms.ModelForm):
     class Meta:
         model = Clients
-<<<<<<< HEAD
         fields = '__all__'
 
 
 class Blog_Form(forms.ModelForm):
     class Meta:
         model = Blog
-=======
->>>>>>> origin/main
         fields = '__all__'

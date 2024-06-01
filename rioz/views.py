@@ -1,10 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
-<<<<<<< HEAD
-from rioz.models import Information, Blog, About, Experience, Service, Skills, Clients, Message
-=======
-from rioz.models import Information, About, Experience, Service, Skills, Clients, Message
->>>>>>> origin/main
+from rioz.models import Information, About, Experience, Service, Skills, Clients, Message, Blog
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
@@ -70,7 +66,7 @@ def messages_delete(request, pk):
 
 
 
-<<<<<<< HEAD
+
 def blog(request):
     blog = Blog.objects.all()
     information = Information.objects.first()
@@ -82,8 +78,7 @@ def blog(request):
 
 
 
-=======
->>>>>>> origin/main
+
 def messageForm(request):
     information = Information.objects.first()
     about = About.objects.first()
@@ -109,10 +104,7 @@ def messageForm(request):
 
 def resume_view(request):
     information = Information.objects.first()
-<<<<<<< HEAD
     about = About.objects.first()
-=======
->>>>>>> origin/main
 
     if request.method == "POST":
         resume_form = ResumeForm(request.POST, request.FILES)
@@ -129,12 +121,10 @@ def resume_view(request):
         resume_form = ResumeForm()
 
     return render(request, 'rioz/resume.html', {'information': information,
-<<<<<<< HEAD
                                                 'form': resume_form,
-                                                'about': about})
-=======
-                                                'form': resume_form })
->>>>>>> origin/main
+                                                'about': about,})
+
+
 
 
 def experience_view(request):

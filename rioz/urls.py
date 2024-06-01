@@ -14,8 +14,5 @@ urlpatterns = [
     path('experience/', views.experience_view, name='experience'),
     path('clients/', views.client_manage, name='client_manage'),
     path('clients/delete/<pk>/', views.client_delete, name='client_delete'),
-<<<<<<< HEAD
     path('blogs/', views.blog, name='blog'),
-=======
->>>>>>> origin/main
 ]

@@ -3,10 +3,8 @@ from django.core.validators import MaxLengthValidator, MinLengthValidator, MaxVa
 import os
 from django.db.models.signals import post_delete
 from django.dispatch import receiver
-<<<<<<< HEAD
 from django.utils.text import Truncator
-=======
->>>>>>> origin/main
+
 
 # Create your models here.
 class Information(models.Model):
@@ -136,12 +134,9 @@ class Blog(models.Model):
     def __str__(self):
         return self.blog_topic
     
-<<<<<<< HEAD
     def get_excerpt(self, num_chars=100):
         return Truncator(self.blog_text).chars(num_chars)
     
-=======
->>>>>>> origin/main
 
 class Comments(models.Model):
     comment_id = models.CharField(unique=True, max_length=15, auto_created=True, editable=False)
